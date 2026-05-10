@@ -16,6 +16,22 @@ npm run dev
 
 The app runs on `http://localhost:5173`.
 
+## Start Both Apps
+
+If `ytdlp-frontend` and `ytdlp-backend` are sibling folders, you can start the whole local app from this repo:
+
+```bash
+npm run dev:all
+```
+
+On Windows, you can also double-click:
+
+```text
+start-ytdlp.cmd
+```
+
+This opens the backend on `http://localhost:3000`, the frontend on `http://localhost:5173`, and then opens the frontend in your browser.
+
 ## Backend Contract
 
 By default the UI sends:
