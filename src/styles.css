@@ -1,6 +1,6 @@
 :root {
-  color: #182028;
-  background: #eef2f6;
+  color: #e8f7ff;
+  background: #090b12;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
@@ -27,9 +27,10 @@ input {
   place-items: center;
   padding: 28px;
   background:
-    linear-gradient(135deg, rgba(39, 113, 128, 0.13), transparent 36%),
-    linear-gradient(315deg, rgba(178, 47, 69, 0.12), transparent 34%),
-    #eef2f6;
+    radial-gradient(circle at 18% 12%, rgba(0, 224, 255, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 20%, rgba(255, 75, 155, 0.16), transparent 26%),
+    radial-gradient(circle at 52% 100%, rgba(141, 104, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, #090b12 0%, #111321 48%, #0a1018 100%);
 }
 
 .workspace {
@@ -37,10 +38,13 @@ input {
   display: grid;
   gap: 24px;
   padding: clamp(24px, 5vw, 48px);
-  border: 1px solid rgba(24, 32, 40, 0.1);
+  border: 1px solid rgba(102, 244, 255, 0.2);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 24px 80px rgba(16, 24, 32, 0.16);
+  background: linear-gradient(145deg, rgba(14, 18, 30, 0.94), rgba(18, 22, 36, 0.86));
+  box-shadow:
+    0 24px 90px rgba(0, 0, 0, 0.46),
+    0 0 44px rgba(0, 224, 255, 0.08);
+  backdrop-filter: blur(18px);
 }
 
 .masthead {
@@ -53,7 +57,7 @@ input {
 .eyebrow,
 .status-label {
   margin: 0 0 8px;
-  color: #5d6874;
+  color: #6df6ff;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -63,10 +67,11 @@ input {
 h1 {
   max-width: 680px;
   margin: 0;
-  color: #151b22;
+  color: #f6fbff;
   font-size: clamp(2.25rem, 5vw, 4.8rem);
   line-height: 0.98;
   letter-spacing: 0;
+  text-shadow: 0 0 28px rgba(109, 246, 255, 0.16);
 }
 
 .format-strip {
@@ -82,12 +87,17 @@ h1 {
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
-  border: 1px solid rgba(24, 32, 40, 0.12);
+  border: 1px solid rgba(109, 246, 255, 0.2);
   border-radius: 8px;
-  color: #27313c;
-  background: #f8fafc;
+  color: #d9fbff;
+  background: rgba(8, 14, 24, 0.72);
   font-size: 0.92rem;
   font-weight: 700;
+  box-shadow: inset 0 0 18px rgba(109, 246, 255, 0.04);
+}
+
+.format-strip svg {
+  color: #ff6fb1;
 }
 
 .download-form {
@@ -96,7 +106,7 @@ h1 {
 }
 
 .download-form label {
-  color: #27313c;
+  color: #f4f8ff;
   font-weight: 800;
 }
 
@@ -113,18 +123,20 @@ h1 {
   align-items: center;
   min-height: 56px;
   padding: 0 16px;
-  border: 1px solid rgba(24, 32, 40, 0.16);
+  border: 1px solid rgba(109, 246, 255, 0.22);
   border-radius: 8px;
-  background: #ffffff;
+  background: rgba(6, 10, 18, 0.82);
 }
 
 .url-field:focus-within {
-  border-color: #287b8d;
-  box-shadow: 0 0 0 4px rgba(40, 123, 141, 0.14);
+  border-color: #6df6ff;
+  box-shadow:
+    0 0 0 4px rgba(109, 246, 255, 0.12),
+    0 0 32px rgba(109, 246, 255, 0.14);
 }
 
 .url-field svg {
-  color: #637083;
+  color: #8d68ff;
 }
 
 input {
@@ -132,12 +144,12 @@ input {
   min-width: 0;
   border: 0;
   outline: 0;
-  color: #182028;
+  color: #f6fbff;
   background: transparent;
 }
 
 input::placeholder {
-  color: #8a95a3;
+  color: #77869a;
 }
 
 button {
@@ -149,20 +161,24 @@ button {
   gap: 10px;
   border: 0;
   border-radius: 8px;
-  color: #ffffff;
-  background: #b72f45;
+  color: #091018;
+  background: linear-gradient(135deg, #6df6ff, #ff6fb1);
   font-weight: 800;
   cursor: pointer;
   transition:
     transform 160ms ease,
     background 160ms ease,
     box-shadow 160ms ease;
-  box-shadow: 0 14px 34px rgba(183, 47, 69, 0.26);
+  box-shadow:
+    0 16px 34px rgba(255, 111, 177, 0.2),
+    0 0 28px rgba(109, 246, 255, 0.18);
 }
 
 button:hover:not(:disabled) {
   transform: translateY(-1px);
-  background: #9e2638;
+  box-shadow:
+    0 18px 42px rgba(255, 111, 177, 0.26),
+    0 0 38px rgba(109, 246, 255, 0.24);
 }
 
 button:disabled {
@@ -177,27 +193,27 @@ button:disabled {
   align-items: center;
   min-height: 98px;
   padding: 18px;
-  border: 1px solid rgba(24, 32, 40, 0.1);
-  border-left: 5px solid #657282;
+  border: 1px solid rgba(109, 246, 255, 0.16);
+  border-left: 5px solid #718198;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(9, 14, 24, 0.72);
 }
 
 .status-panel.submitting {
-  border-left-color: #287b8d;
+  border-left-color: #6df6ff;
 }
 
 .status-panel.success {
-  border-left-color: #1f8a5b;
+  border-left-color: #5cffb1;
 }
 
 .status-panel.error {
-  border-left-color: #b72f45;
+  border-left-color: #ff6f91;
 }
 
 .status-message {
   margin: 0;
-  color: #182028;
+  color: #f3f8ff;
   font-size: 1.05rem;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -207,8 +223,8 @@ button:disabled {
   margin: 0;
   padding: 8px 10px;
   border-radius: 8px;
-  color: #465363;
-  background: #eef2f6;
+  color: #b6c7dc;
+  background: rgba(4, 8, 15, 0.72);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 0.82rem;
   overflow-wrap: anywhere;
