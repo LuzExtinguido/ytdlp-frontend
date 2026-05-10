@@ -151,3 +151,9 @@ function successMessage(payload: DownloadResponse) {
 
   return 'Download completed successfully.';
 }
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
