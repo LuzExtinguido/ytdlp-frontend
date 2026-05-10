@@ -25,9 +25,15 @@ POST http://localhost:3000/downloads
 Content-Type: application/json
 
 {
-  "url": "https://www.youtube.com/watch?v=..."
+  "url": "https://www.youtube.com/watch?v=...",
+  "format": "video"
 }
 ```
+
+Supported `format` values:
+
+- `video`: backend should run `yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" --merge-output-format mp4 URL`
+- `audio`: backend should run `yt-dlp -f ba -x --audio-format m4a --embed-thumbnail --add-metadata URL`
 
 Expected success response can be any JSON with an optional `message`, `filename`, `path`, or `status` field.
 

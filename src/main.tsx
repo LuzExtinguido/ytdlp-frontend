@@ -2,10 +2,11 @@ import { StrictMode } from 'react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Download, Link2, Loader2, Music2, Video, Wand2 } from 'lucide-react';
+import { Download, Link2, Loader2, Music2, Video } from 'lucide-react';
 import './styles.css';
 
 type DownloadState = 'idle' | 'submitting' | 'success' | 'error';
+type DownloadFormat = 'video' | 'audio';
 
 type DownloadResponse = {
   message?: string;
@@ -19,8 +20,9 @@ const DOWNLOAD_ENDPOINT = import.meta.env.VITE_DOWNLOAD_ENDPOINT ?? '/downloads'
 
 function App() {
   const [url, setUrl] = useState('');
+  const [format, setFormat] = useState<DownloadFormat>('video');
   const [state, setState] = useState<DownloadState>('idle');
-  const [message, setMessage] = useState('Ready to download a video at 720p or best available below it.');
+  const [message, setMessage] = useState('Ready to download MP4 video at 720p or M4A audio.');
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,7 +35,7 @@ function App() {
     }
 
     setState('submitting');
-    setMessage('Sending the URL to the backend...');
+    setMessage(`Sending the ${formatLabel(format)} request to the backend...`);
 
     try {
       const response = await fetch(`${API_BASE_URL}${DOWNLOAD_ENDPOINT}`, {
@@ -41,7 +43,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url: trimmedUrl }),
+        body: JSON.stringify({ url: trimmedUrl, format }),
       });
 
       const contentType = response.headers.get('content-type') ?? '';
@@ -69,16 +71,27 @@ function App() {
             <p className="eyebrow">Local yt-dlp frontend</p>
             <h1 id="app-title">Download video and audio from one clean panel.</h1>
           </div>
-          <div className="format-strip" aria-label="Planned formats">
-            <span title="MVP target: MP4 video up to 720p">
+          <div className="format-strip" aria-label="Download format">
+            <button
+              type="button"
+              className={format === 'video' ? 'format-option active' : 'format-option'}
+              aria-pressed={format === 'video'}
+              onClick={() => setFormat('video')}
+              disabled={state === 'submitting'}
+              title="MP4 video up to 720p"
+            >
               <Video size={18} aria-hidden="true" /> MP4
-            </span>
-            <span title="Future audio download option">
-              <Music2 size={18} aria-hidden="true" /> MP3
-            </span>
-            <span title="Future format controls">
-              <Wand2 size={18} aria-hidden="true" /> Queue
-            </span>
+            </button>
+            <button
+              type="button"
+              className={format === 'audio' ? 'format-option active' : 'format-option'}
+              aria-pressed={format === 'audio'}
+              onClick={() => setFormat('audio')}
+              disabled={state === 'submitting'}
+              title="M4A audio with thumbnail and metadata"
+            >
+              <Music2 size={18} aria-hidden="true" /> M4A
+            </button>
           </div>
         </div>
 
@@ -105,7 +118,7 @@ function App() {
               ) : (
                 <Download size={20} aria-hidden="true" />
               )}
-              <span>{state === 'submitting' ? 'Downloading' : 'Download'}</span>
+              <span>{state === 'submitting' ? 'Downloading' : `Download ${formatLabel(format)}`}</span>
             </button>
           </div>
         </form>
@@ -150,6 +163,10 @@ function successMessage(payload: DownloadResponse) {
   }
 
   return 'Download completed successfully.';
+}
+
+function formatLabel(format: DownloadFormat) {
+  return format === 'video' ? 'MP4' : 'M4A';
 }
 
 createRoot(document.getElementById('root')!).render(
